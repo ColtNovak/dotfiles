@@ -1,0 +1,28 @@
+@import url("file:///etc/xdg/swaync/style.css");
+
+:root {
+  --cc-bg: rgb(30, 30, 46);
+  --noti-border-color: rgba(203, 166, 247, 0.35);
+  --noti-bg: 49, 50, 68;
+  --noti-bg-alpha: 1.0;
+  --noti-bg-darker: rgb(24, 24, 37);
+  --noti-bg-hover: rgb(69, 71, 90);
+  --noti-bg-focus: rgba(88, 91, 112, 0.6);
+  --noti-close-bg: rgb(69, 71, 90);
+  --noti-close-bg-hover: rgb(243, 139, 168);
+  --text-color: rgb(205, 214, 244);
+  --text-color-disabled: rgb(108, 112, 134);
+  --bg-selected: rgb(203, 166, 247);
+  --border-radius: 14px;
+}
+
+* { font-family: "JetBrainsMono Nerd Font", sans-serif; }
+
+.control-center { border: 2px solid rgba(203, 166, 247, 0.45); }
+.widget-title > button { color: rgb(243, 139, 168); }
+.widget-dnd > switch:checked { background: rgb(203, 166, 247); }
+.widget-buttons-grid > flowbox > flowboxchild > button.toggle:checked {
+  background: rgba(203, 166, 247, 0.85);
+  color: rgb(17, 17, 27);
+}
+.notification.critical { border: 2px solid rgb(243, 139, 168); }

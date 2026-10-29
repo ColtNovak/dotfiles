@@ -1,0 +1,63 @@
+format = "$directory$git_branch$git_status$python$nodejs$rust$golang$java$cmd_duration$line_break$character"
+add_newline = true
+palette = "mocha"
+
+[palettes.mocha]
+text = "#cdd6f4"
+subtext = "#a6adc8"
+overlay = "#6c7086"
+mauve = "#cba6f7"
+blue = "#89b4fa"
+green = "#a6e3a1"
+yellow = "#f9e2af"
+peach = "#fab387"
+red = "#f38ba8"
+
+[directory]
+style = "bold blue"
+truncation_length = 3
+truncate_to_repo = false
+format = "[$path]($style)[$read_only]($style) "
+
+[git_branch]
+symbol = ""
+style = "mauve"
+format = "[$symbol $branch]($style) "
+
+[git_status]
+style = "peach"
+format = "([$all_status$ahead_behind]($style) )"
+
+[python]
+symbol = ""
+style = "yellow"
+format = "[$symbol $version]($style) "
+version_format = "${major}.${minor}"
+
+[nodejs]
+style = "green"
+format = "[ $version]($style) "
+version_format = "${major}"
+
+[rust]
+style = "peach"
+format = "[ $version]($style) "
+version_format = "${major}.${minor}"
+
+[golang]
+style = "blue"
+format = "[ $version]($style) "
+
+[java]
+style = "red"
+format = "[ $version]($style) "
+version_format = "${major}"
+
+[cmd_duration]
+min_time = 2000
+style = "overlay"
+format = "[$duration]($style)"
+
+[character]
+success_symbol = "[❯](mauve)"
+error_symbol = "[❯](red)"

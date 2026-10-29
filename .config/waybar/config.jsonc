@@ -1,0 +1,95 @@
+{
+    "layer": "top",
+    "position": "top",
+    "height": 34,
+    "margin-top": 8,
+    "margin-left": 12,
+    "margin-right": 12,
+    "spacing": 6,
+    "reload_style_on_change": true,
+
+    "modules-left":   ["custom/logo", "hyprland/workspaces", "mpris"],
+    "modules-center": ["clock"],
+    "modules-right":  ["tray", "group/stats", "pulseaudio", "network", "battery", "custom/notification"],
+
+    "custom/logo": {
+        "format": "󰣇",
+        "tooltip": false,
+        "on-click": "vicinae toggle"
+    },
+
+    "hyprland/workspaces": {
+        "format": "{name}",
+        "on-click": "activate"
+    },
+
+    "mpris": {
+        "format": "{status_icon} {title}",
+        "format-paused": "{status_icon} <i>{title}</i>",
+        "status-icons": { "playing": "󰐊", "paused": "󰏤" },
+        "max-length": 40,
+        "tooltip-format": "{artist} - {title}"
+    },
+
+    "clock": {
+        "format": "{:%H:%M}",
+        "format-alt": "{:%a %d %b  %H:%M}",
+        "tooltip-format": "<tt><small>{calendar}</small></tt>"
+    },
+
+    "tray": { "icon-size": 14, "spacing": 8 },
+
+    "group/stats": {
+        "orientation": "horizontal",
+        "modules": ["cpu", "memory"]
+    },
+    "cpu":    { "format": "󰻠 {usage}%", "interval": 5 },
+    "memory": { "format": "󰍛 {percentage}%", "interval": 5, "tooltip-format": "{used:0.1f} / {total:0.1f} GiB" },
+
+    "pulseaudio": {
+        "format": "{icon} {volume}%",
+        "format-muted": "󰝟",
+        "format-bluetooth": "󰋋 {volume}%",
+        "format-icons": { "headphone": "󰋋", "headset": "󰋋", "default": ["󰕿", "󰖀", "󰕾"] },
+        "on-click": "pwvucontrol",
+        "on-click-right": "swayosd-client --output-volume mute-toggle",
+        "scroll-step": 5,
+        "tooltip-format": "{desc}"
+    },
+
+    "network": {
+        "format-wifi": "󰖩",
+        "format-ethernet": "󰈀",
+        "format-disconnected": "󰖪",
+        "tooltip-format-wifi": "{essid} · {signalStrength}%\n{ipaddr}",
+        "tooltip-format-ethernet": "{ifname} · {ipaddr}",
+        "on-click": "nm-connection-editor"
+    },
+
+    "battery": {
+        "interval": 30,
+        "states": { "warning": 25, "critical": 12 },
+        "format": "{icon} {capacity}%",
+        "format-charging": "󰂄 {capacity}%",
+        "format-plugged": "󰚥",
+        "format-full": "󰚥",
+        "format-icons": ["󰁺", "󰁼", "󰁾", "󰂀", "󰁹"],
+        "tooltip-format": "{capacity}% · {timeTo}"
+    },
+
+    "custom/notification": {
+        "tooltip": false,
+        "format": "{icon}",
+        "format-icons": {
+            "notification": "󰂚", "none": "󰂜",
+            "dnd-notification": "󰂛", "dnd-none": "󰂛",
+            "inhibited-notification": "󰂚", "inhibited-none": "󰂜",
+            "dnd-inhibited-notification": "󰂛", "dnd-inhibited-none": "󰂛"
+        },
+        "return-type": "json",
+        "exec": "swaync-client -swb",
+        "on-click": "swaync-client -t -sw",
+        "on-click-right": "swaync-client -d -sw",
+        "escape": true
+    }
+}

@@ -1,0 +1,29 @@
+theme = Catppuccin Mocha
+font-family = JetBrainsMono Nerd Font
+font-size = 14
+adjust-cell-height = 15%
+minimum-contrast = 4.5
+
+background-opacity = 0.86
+background-blur = true
+window-padding-x = 16
+window-padding-y = 14
+window-padding-balance = true
+window-decoration = false
+gtk-titlebar = false
+cursor-style = block
+mouse-hide-while-typing = true
+shell-integration = detect
+shell-integration-features = cursor,sudo,title,ssh-env,ssh-terminfo
+copy-on-select = clipboard
+clipboard-trim-trailing-spaces = true
+confirm-close-surface = false
+window-save-state = always
+
+command = /usr/bin/fish
+
+bold-color = bright
+mouse-scroll-multiplier = precision:1,discrete:5
+cursor-style-blink = false
+unfocused-split-opacity = 0.85
+scrollback-limit = 50000000

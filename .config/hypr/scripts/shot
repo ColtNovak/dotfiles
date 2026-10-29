@@ -1,0 +1,44 @@
+#!/usr/bin/env bash
+set -uo pipefail
+
+DIR="$HOME/Pictures/Screenshots"
+mkdir -p "$DIR"
+FILE="$DIR/$(date +%Y%m%d-%H%M%S).png"
+
+exec 9>"${XDG_RUNTIME_DIR:-/tmp}/shot.lock"; flock -n 9 || exit 0
+
+SLURP=(slurp -d -o -w 2 -b '#11111b80' -c '#cba6f7ff' -s '#cba6f71a' -B '#cba6f726')
+
+visible_boxes() {
+    local ws
+    ws=$(hyprctl monitors -j | jq -c '[.[] | .activeWorkspace.id, .specialWorkspace.id] | map(select(. != 0))')
+    hyprctl clients -j | jq -r --argjson ws "$ws" '
+        .[] | select(.mapped and (.hidden | not) and (.workspace.id as $w | $ws | index($w)))
+            | "\(.at[0]),\(.at[1]) \(.size[0])x\(.size[1])"'
+}
+
+pick() {
+    hyprpicker -r -z >/dev/null 2>&1 & local freeze=$!
+    sleep 0.15
+    local geom
+    geom=$(visible_boxes | "${SLURP[@]}" 2>/dev/null)
+    if [[ -n $geom ]]; then grim -g "$geom" "$1"; fi
+    kill "$freeze" 2>/dev/null
+    [[ -n $geom && -s $1 ]]
+}
+
+done_notify() {
+    wl-copy --type image/png < "$FILE"
+    ( act=$(notify-send -a Screenshot -i "$FILE" -A edit=Edit "Screenshot copied" "$(basename "$FILE")")
+      [[ $act == edit ]] && satty --filename "$FILE" ) >/dev/null 2>&1 9>&- &
+}
+
+case ${1:-area} in
+    area)   pick "$FILE" && done_notify ;;
+    edit)   tmp=$(mktemp --suffix=.png)
+            pick "$tmp" && satty --filename "$tmp"
+            rm -f "$tmp" ;;
+    screen) mon=$(hyprctl monitors -j | jq -r '.[] | select(.focused) | .name')
+            grim -o "$mon" "$FILE" && done_notify ;;
+    *)      echo "usage: shot area|edit|screen" >&2; exit 1 ;;
+esac

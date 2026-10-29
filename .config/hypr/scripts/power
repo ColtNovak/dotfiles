@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+case $(printf '󰌾  Lock\n󰍃  Log out\n󰒲  Suspend\n󰜉  Reboot\n󰐥  Shut down\n' | vicinae dmenu -p Power) in
+    *Lock*)     hyprlock ;;
+    *Log*)      hyprctl dispatch 'hl.dsp.exit()' ;;
+    *Suspend*)  systemctl suspend ;;
+    *Reboot*)   systemctl reboot ;;
+    *Shut*)     systemctl poweroff ;;
+esac

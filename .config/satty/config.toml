@@ -1,0 +1,17 @@
+[general]
+early-exit = true
+initial-tool = "arrow"
+copy-command = "wl-copy"
+corner-roundness = 12
+output-filename = "~/Pictures/Screenshots/annotated-%Y%m%d-%H%M%S.png"
+actions-on-enter = ["save-to-clipboard", "save-to-file"]
+actions-on-escape = ["exit"]
+save-after-copy = false
+no-window-decoration = true
+
+[font]
+family = "JetBrainsMono Nerd Font"
+style = "Bold"
+
+[color-palette]
+palette = ["#f38ba8", "#fab387", "#f9e2af", "#a6e3a1", "#89b4fa", "#cba6f7", "#cdd6f4", "#11111b"]
